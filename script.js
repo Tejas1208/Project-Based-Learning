@@ -1,10 +1,8 @@
 /* script.js
-   WeatherAPI.com version — using environment variable
-   Sign up free: https://www.weatherapi.com/
-   On Vercel, set API_KEY in Project Settings → Environment Variables
+   WeatherAPI.com version — Secure API key with Vercel serverless function
+   The browser calls /api/weather which uses the key on the server.
 */
 
-const API_KEY = process.env.API_KEY || ""; // <-- pulled from environment
 const unitsKey = "wf_units";
 const lastCityKey = "wf_last_city";
 
@@ -82,11 +80,8 @@ function useGeolocation() {
 
 async function fetchWeather(query) {
   try {
-    if (!API_KEY) {
-      throw new Error("API key missing. Set API_KEY in environment variables.");
-    }
     showLoading();
-    const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${encodeURIComponent(query)}&days=5&aqi=no`);
+    const res = await fetch(`/api/weather?q=${encodeURIComponent(query)}`);
     if (!res.ok) throw new Error("City not found");
     const data = await res.json();
     renderCurrent(data);
@@ -158,11 +153,6 @@ function handleError(e) {
 }
 
 (function init() {
-  if (!API_KEY) {
-    selectors.city.textContent = "API key not set.";
-    selectors.desc.textContent = "Set API_KEY in Vercel environment variables.";
-    return;
-  }
   const last = localStorage.getItem(lastCityKey);
   if (last) {
     selectors.cityInput.value = last;
@@ -173,4 +163,5 @@ function handleError(e) {
     }, () => { });
   }
 })();
+
 
