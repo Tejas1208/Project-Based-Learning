@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>WeatherFlow — Animated Forecast</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="app">
+        <header class="topbar">
+            <div class="brand">
+                <div class="logo">☀️</div>
+                <h1>WeatherFlow</h1>
+            </div>
+
+            <div class="controls">
+                <div class="search">
+                    <input id="cityInput" type="search" placeholder="Search city (e.g. London)" />
+                    <button id="searchBtn" aria-label="Search">Search</button>
+                </div>
+                <button id="locBtn" title="Use my location">📍</button>
+                <div class="unit-toggle">
+                    <button id="cBtn" class="active">°C</button>
+                    <button id="fBtn">°F</button>
+                </div>
+            </div>
+        </header>
+
+        <section id="weatherCard" class="weather-card">
+            <div class="backdrop" id="backdrop"></div>
+
+            <div class="mainInfo" id="mainInfo">
+                <div class="left">
+                    <div id="icon" class="weatherIcon" aria-hidden="true"></div>
+                    <div class="tempWrap">
+                        <div id="temp" class="temp">--°</div>
+                        <div id="desc" class="desc">--</div>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <div id="city" class="city">Search or use location</div>
+                    <div class="meta">
+                        <div>Humidity: <span id="humidity">--</span>%</div>
+                        <div>Wind: <span id="wind">--</span> m/s</div>
+                        <div>Feels: <span id="feels">--</span>°</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="forecast" class="forecast"></div>
+        </section>
+
+        <footer class="footer">
+            <small>Data from WeatherAPI • PBL 2025 • By Tejas Dharashivkar</small>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
